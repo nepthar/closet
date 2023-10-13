@@ -17,16 +17,16 @@ run-dev-image() {
   docker run -it -p8000:8000 \
     --volume=./flaskr:/app/flaskr \
     --volume=${PWD}/flaskr.sqlite:/app/instance/flaskr.sqlite \
-    "${DK_TAG}:devel" flask --app flaskr "$@"
+    "${DK_TAG}:devel" "$@"
 }
 
 # Run the development server
 run-dev() {
-  run-dev-image run --host=0.0.0.0 --port=8000 --debug
+  run-dev-image flask --app flaskr run --host=0.0.0.0 --port=8000 --debug
 }
 
 build-prod-image() {
-  if [[ -z $1 ]]; then;
+  if [[ -z $1 ]]; then
     echo "Supply the tag for image"
     return 1
   fi
