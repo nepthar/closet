@@ -1,20 +1,19 @@
-#!/usr/bin/env bash
-
-# All of these are prefixed with fd0 for some command matching magic
+# These are helpful functions for working with this project. Feel free
+# to copy/paste or source this file.
 
 DK_TAG="flask-docker-0"
 
-fd0.build-dev() {
+build-dev-image() {
   docker build -t "${DK_TAG}:devel" .
 }
 
-fd0.run-dev() {
+run-dev-image() {
   docker run -it -p=8000:8000 --volume=.:/app "${DK_TAG}/devel" python3 app.py
 }
 
-fd0.build-prod() {
+build-prod-image() {
   if [[ -z $1 ]]; then;
-    echo "Supply the tag for the push command"
+    echo "Supply the tag for image"
     return 1
   fi
 
@@ -22,15 +21,11 @@ fd0.build-prod() {
   docker buildx build --platform=linux/amd64 -t "${1}" .
 }
 
-fd0.push-prod() {
+push-prod-image() {
    if [[ -z $1 ]]; then;
-    echo "Supply the tag for the push command"
+    echo "Supply the tag for the image"
     return 1
   fi
 
   docker push "${1}"
 }
-
-if [[ ! -z $1 ]]; then
-  fd0.${1}
-fi
