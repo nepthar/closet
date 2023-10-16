@@ -6,24 +6,24 @@ from flask import (
     send_from_directory,
     request,
 )
-# from flask_sqlalchemy import SQLAlchemy
-# from werkzeug.utils import secure_filename
+from flask_sqlalchemy import SQLAlchemy
+#from werkzeug.utils import secure_filename
 
 
 app = Flask(__name__)
-#app.config.from_object("flaskapp.config.Config")
-# db = SQLAlchemy(app)
+app.config.from_object("flaskapp.config.Config")
+db = SQLAlchemy(app)
 
 
-# class User(db.Model):
-#     __tablename__ = "users"
+class User(db.Model):
+    __tablename__ = "users"
 
-#     id = db.Column(db.Integer, primary_key=True)
-#     email = db.Column(db.String(128), unique=True, nullable=False)
-#     active = db.Column(db.Boolean(), default=True, nullable=False)
+    id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String(128), unique=True, nullable=False)
+    active = db.Column(db.Boolean(), default=True, nullable=False)
 
-#     def __init__(self, email):
-#         self.email = email
+    def __init__(self, email):
+        self.email = email
 
 
 @app.route("/")

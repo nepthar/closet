@@ -6,3 +6,8 @@ connects to an external postgres db, and is served through nginx. This
 is a more complicated setup but should be closer to production.
 
 ## Dev Environ Setup
+
+
+
+## Notes
+Without the depends_on relationship, you'll get connection/visibility errors. It'll show up as the `flaskapp` image not being able to resolve the hostname `db`.
