@@ -15,16 +15,18 @@ build-dev-image() {
 # entrypoint script
 run-dev-image() {
   docker run -it -p8000:8000 \
-    --volume=./flaskr:/app/flaskr \
-    --volume=${PWD}/flaskr.sqlite:/app/instance/flaskr.sqlite \
+    --volume=./flaskapp:/app/flaskapp \
+    --volume=${PWD}/flaskapp.sqlite:/app/instance/flaskapp.sqlite \
     "${DK_TAG}:devel" "$@"
 }
 
 # Run the development server
 run-dev() {
-  run-dev-image flask --app flaskr run --host=0.0.0.0 --port=8000 --debug
+  run-dev-image flask --app flaskapp run --host=0.0.0.0 --port=8000 --debug
 }
 
+# This build command assumes you're on macos and wish to build an amd64
+# version of your image to push to a cloud provider.
 build-prod-image() {
   if [[ -z $1 ]]; then
     echo "Supply the tag for image"

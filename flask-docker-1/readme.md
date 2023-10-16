@@ -1,5 +1,7 @@
-# Dockerized Flask App - Real website w/database
+# Dockerized Flask App - Website with Mysql database
 Taken from https://flask.palletsprojects.com/en/3.0.x/tutorial/layout/
+
+Note that the app is called "flaskapp"
 
 ## Dev Environ Setup
 
@@ -18,19 +20,19 @@ To run the server to test out your current changes, use the following command:
 
     # from the flask-docker-1 folder:
     docker run -it -p=8000:8000 \
-      --volume=./flaskr:/app/flaskr \
-      --volume=${PWD}/flaskr.sqlite:app/instance/flaskr.sqlite \
+      --volume=./flaskapp:/app/flaskapp \
+      --volume=${PWD}/flaskapp.sqlite:app/instance/flaskapp.sqlite \
       flask-docker-1:devel \
-      flask --app flaskr run --host=0.0.0.0 --port=8000 --debug
+      flask --app flaskapp run --host=0.0.0.0 --port=8000 --debug
 
 You may wish to use the following function to assist with running flask commands
 
     dev-flask() {
        docker run -it -p=8000:8000 \
-        --volume=./flaskr:/app/flaskr \
-        --volume=${PWD}/flaskr.sqlite:app/instance/flaskr.sqlite \
+        --volume=./flaskapp:/app/flaskapp \
+        --volume=${PWD}/flaskapp.sqlite:app/instance/flaskapp.sqlite \
         flask-docker-1:devel \
-        flask --app flaskr "$@"
+        flask --app flaskapp "$@"
     }
 
 which would then simplify running the devel server to this:
