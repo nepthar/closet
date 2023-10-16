@@ -9,3 +9,9 @@ kept as simple as possible just to get a "hello world" to production.
 
 I hope that this will give intuition about how projects should be laid out as
 they grow.
+
+
+## Deploying to 'Production'
+We're using AWS Lightsail to deploy these containers and it's the simplest I
+could find. All of the instructions on how to do it assume you have the `aws`
+command properly installed/configured/authed. https://aws.amazon.com/cli/
