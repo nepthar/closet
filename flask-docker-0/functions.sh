@@ -8,7 +8,7 @@ build-dev-image() {
 }
 
 run-dev-image() {
-  docker run -it -p=8000:8000 --volume=.:/app "${DK_TAG}/devel" python3 app.py
+  docker run -it -p=8000:8000 --volume=.:/app "${DK_TAG}/devel" python3 flaskapp.py
 }
 
 build-prod-image() {
