@@ -2,17 +2,19 @@
 # to copy/paste or source this file.
 
 DK_TAG="flask-docker-0"
+AWS_REGION=us-east-2
+AWS_LIGHTSAIL_SERVICE="flask-docker-0"
 
 build-dev-image() {
   docker build -t "${DK_TAG}:devel" .
 }
 
 run-dev-image() {
-  docker run -it -p=8000:8000 --volume=.:/app "${DK_TAG}/devel" python3 flaskapp.py
+  docker run -it -p=8000:8000 --volume=.:/app "${DK_TAG}:devel" python3 flaskapp.py
 }
 
 build-prod-image() {
-  if [[ -z $1 ]]; then;
+  if [[ -z $1 ]] then
     echo "Supply the tag for image"
     return 1
   fi
@@ -22,10 +24,21 @@ build-prod-image() {
 }
 
 push-prod-image() {
-   if [[ -z $1 ]]; then;
+   if [[ -z $1 ]]; then
     echo "Supply the tag for the image"
     return 1
   fi
 
-  docker push "${1}"
+  # #aws lightsail push-container-image
+  #   --region <Region>
+  #   --service-name <ContainerServiceName>
+  #   --label <ContainerImageLabel>
+  #   --image <LocalContainerImageName>:<ImageTag>
+
+  aws lightsail push-container-image \
+    --region "$AWS_REGION" \
+    --service-name "$AWS_LIGHTSAIL_SERVICE" \
+    --label "flaskapp" \
+    --image "$1"
+
 }

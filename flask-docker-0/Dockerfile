@@ -3,4 +3,4 @@ WORKDIR /app
 COPY . /app
 RUN pip install -r requirements.txt
 EXPOSE 8000
-CMD gunicorn --workers=2 --bind=0.0.0.0:80 'app:app'
+CMD gunicorn --workers=2 --bind=0.0.0.0:80 'flaskapp:app'
