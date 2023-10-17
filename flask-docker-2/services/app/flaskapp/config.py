@@ -23,6 +23,8 @@ def forEnv(env):
 
   raise f"No environment for {env}"
 
+# Note: Since this is ALWAYS run within a container, these paths can be entirely
+# static.
 class Config(object):
   SQLALCHEMY_DATABASE_URI = "sqlite://:memory:"
   SQLALCHEMY_TRACK_MODIFICATIONS = False

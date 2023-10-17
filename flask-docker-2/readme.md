@@ -11,3 +11,6 @@ is a more complicated setup but should be closer to production.
 
 ## Notes
 Without the depends_on relationship, you'll get connection/visibility errors. It'll show up as the `flaskapp` image not being able to resolve the hostname `db`.
+
+
+
